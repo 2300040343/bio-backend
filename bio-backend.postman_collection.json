@@ -1,0 +1,526 @@
+{
+  "info": {
+    "name": "Bio Backend API",
+    "description": "Postman collection for User, Admin, HOD, and Super Admin features.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "List all users",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-user-role", "value": "admin" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/users",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "users"]
+            }
+          }
+        },
+        {
+          "name": "List all attendance records",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-user-role", "value": "admin" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/attendance",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "attendance"]
+            }
+          }
+        },
+        {
+          "name": "Export users as CSV",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-user-role", "value": "admin" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/users/export",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "users", "export"]
+            }
+          }
+        },
+        {
+          "name": "Filter users by department",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-user-role", "value": "admin" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/users?department=CSE",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "users"],
+              "query": [
+                { "key": "department", "value": "CSE" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Approve leave request",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "x-user-role", "value": "admin" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/leave/approve",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "leave", "approve"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"leaveId\": \"12345\",\n  \"status\": \"approved\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Reject leave request",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "x-user-role", "value": "admin" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/leave/reject",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "leave", "reject"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"leaveId\": \"12345\",\n  \"status\": \"rejected\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Send notification",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "x-user-role", "value": "admin" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/notification",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "notification"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Meeting at 3 PM\",\n  \"recipients\": [\"faculty\", \"hod\"]\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Faculty",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{base_url}}/user/register",
+              "host": ["{{base_url}}"],
+              "path": ["user", "register"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"rollNo\": \"123456\",\n  \"password\": \"password123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{base_url}}/user/login",
+              "host": ["{{base_url}}"],
+              "path": ["user", "login"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Update profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "x-user-role", "value": "faculty" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/user/profile",
+              "host": ["{{base_url}}"],
+              "path": ["user", "profile"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"rollNo\": \"123456\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Change password",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "x-user-role", "value": "faculty" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/user/change-password",
+              "host": ["{{base_url}}"],
+              "path": ["user", "change-password"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john@example.com\",\n  \"oldPassword\": \"password123\",\n  \"newPassword\": \"newpass456\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Register device",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "x-user-role", "value": "faculty" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/device/register",
+              "host": ["{{base_url}}"],
+              "path": ["device", "register"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rollNo\": \"123456\",\n  \"deviceId\": \"device-001\",\n  \"macAddress\": \"00:11:22:33:44:55\"\n}"
+            }
+          }
+        },
+        {
+          "name": "View devices",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-user-role", "value": "faculty" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/device?rollNo=123456",
+              "host": ["{{base_url}}"],
+              "path": ["device"],
+              "query": [
+                { "key": "rollNo", "value": "123456" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Mark attendance",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "x-user-role", "value": "faculty" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/attendance/mark",
+              "host": ["{{base_url}}"],
+              "path": ["attendance", "mark"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rollNo\": \"123456\",\n  \"biometric\": true,\n  \"ssid\": \"CampusWiFi\",\n  \"macAddress\": \"00:11:22:33:44:55\",\n  \"geoFence\": true\n}"
+            }
+          }
+        },
+        {
+          "name": "View attendance logs",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-user-role", "value": "faculty" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/attendance?rollNo=123456",
+              "host": ["{{base_url}}"],
+              "path": ["attendance"],
+              "query": [
+                { "key": "rollNo", "value": "123456" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "View attendance statistics",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-user-role", "value": "faculty" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/attendance/stats?rollNo=123456",
+              "host": ["{{base_url}}"],
+              "path": ["attendance", "stats"],
+              "query": [
+                { "key": "rollNo", "value": "123456" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Request leave",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "x-user-role", "value": "faculty" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/leave/request",
+              "host": ["{{base_url}}"],
+              "path": ["leave", "request"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rollNo\": \"123456\",\n  \"fromDate\": \"2025-08-01\",\n  \"toDate\": \"2025-08-03\",\n  \"reason\": \"Medical\"\n}"
+            }
+          }
+        },
+        {
+          "name": "View own leave requests",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-user-role", "value": "faculty" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/leave?rollNo=123456",
+              "host": ["{{base_url}}"],
+              "path": ["leave"],
+              "query": [
+                { "key": "rollNo", "value": "123456" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "View notifications",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-user-role", "value": "faculty" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/notification?rollNo=123456",
+              "host": ["{{base_url}}"],
+              "path": ["notification"],
+              "query": [
+                { "key": "rollNo", "value": "123456" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete account",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              { "key": "x-user-role", "value": "faculty" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/user/delete",
+              "host": ["{{base_url}}"],
+              "path": ["user", "delete"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"john@example.com\",\n  \"rollNo\": \"123456\"\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "HOD",
+      "item": [
+        {
+          "name": "List users in department",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-user-role", "value": "hod" },
+              { "key": "x-user-department", "value": "CSE" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/hod/users?department=CSE",
+              "host": ["{{base_url}}"],
+              "path": ["hod", "users"],
+              "query": [
+                { "key": "department", "value": "CSE" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "List attendance records for department",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-user-role", "value": "hod" },
+              { "key": "x-user-department", "value": "CSE" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/hod/attendance?department=CSE",
+              "host": ["{{base_url}}"],
+              "path": ["hod", "attendance"],
+              "query": [
+                { "key": "department", "value": "CSE" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Approve leave request for department",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "x-user-role", "value": "hod" },
+              { "key": "x-user-department", "value": "CSE" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/hod/leave/approve",
+              "host": ["{{base_url}}"],
+              "path": ["hod", "leave", "approve"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"leaveId\": \"12345\",\n  \"status\": \"approved\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Reject leave request for department",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "x-user-role", "value": "hod" },
+              { "key": "x-user-department", "value": "CSE" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/hod/leave/reject",
+              "host": ["{{base_url}}"],
+              "path": ["hod", "leave", "reject"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"leaveId\": \"12345\",\n  \"status\": \"rejected\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Send notification to department",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "x-user-role", "value": "hod" },
+              { "key": "x-user-department", "value": "CSE" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/hod/notification",
+              "host": ["{{base_url}}"],
+              "path": ["hod", "notification"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"Department meeting at 4 PM\",\n  \"recipients\": [\"faculty\"]\n}"
+            }
+          }
+        },
+        {
+          "name": "View notifications",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-user-role", "value": "hod" },
+              { "key": "x-user-department", "value": "CSE" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/hod/notification?department=CSE",
+              "host": ["{{base_url}}"],
+              "path": ["hod", "notification"],
+              "query": [
+                { "key": "department", "value": "CSE" }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Super Admin",
+      "item": [
+        {
+          "name": "List all users (global)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "x-user-role", "value": "superadmin" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/users",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "users"]
+            }
+          }
+        },
+        {
+          "name": "Manage roles and departments",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "x-user-role", "value": "superadmin" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/roles",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "roles"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"u123\",\n  \"role\": \"admin\",\n  \"department\": \"CSE\"\n}"
+            }
+          }
+        },
+        {
+          "name": "System configuration",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "x-user-role", "value": "superadmin" }
+            ],
+            "url": {
+              "raw": "{{base_url}}/admin/config",
+              "host": ["{{base_url}}"],
+              "path": ["admin", "config"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"setting\": \"maintenanceMode\",\n  \"value\": true\n}"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
