@@ -25,7 +25,7 @@ app.use(cors({
     }
   },
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-user-role'],
   credentials: true,
   optionsSuccessStatus: 200
 }));
@@ -52,7 +52,7 @@ const authUser = require('./middleware/authUser');
 app.use(authUser);
 
 const userRoutes = require("./routes/user");
-app.use("/users", userRoutes);
+app.use("/", userRoutes);
 
 const deviceRoutes = require("./routes/device");
 app.use("/device", deviceRoutes);
